@@ -1,16 +1,15 @@
-const text = document.querySelector("#text");
-const delay = document.querySelector("#delay");
-const btn = document.querySelector("#btn");
+const text = document.getElementById("text");
+const delay = document.getElementById("delay");
+const btn = document.getElementById("btn");
+const output = document.getElementById("output");
 
-btn.addEventListener("click", async () => {
-    let data = text.value;
-    let delayTime = parseInt(delay.value, 10) || 0; 
-
-    let result = await new Promise(resolve => {
-        setTimeout(() => {
-            resolve(data);
-        }, delayTime);
-    });
-
-    document.body.innerHTML = `${result}`;
+async function showMessage() {
+  const message = text.value;
+  const delayVal = delay.value;
+  await new Promise((resolve) => setTimeout(resolve, delayVal));
+  output.innerText = message;
+}
+showMessage().then(()=>{
+	output.innerHTML = text.value;
 });
+btn.addEventListener("click", showMessage);
